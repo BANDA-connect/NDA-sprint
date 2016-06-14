@@ -12,7 +12,22 @@
 
   print('try to connect with '. $url . ' and token ' . $token . '.' . "\n". 'Get data about all instruments in this project.'. "\n");
 
-  
+
+
+// get data from NDA
+$ndar = json_decode(file_get_contents('https://ndar.nih.gov/api/datadictionary/v2/datastructure/image03?format=json'), TRUE);
+file_put_contents($c . 'ndar_image03.json', json_encode($ndar, JSON_PRETTY_PRINT). "\n");
+// get list of data elements
+$ndar_keys = array();
+foreach ($ndar['dataElements'] as $de) {
+   $k = array_keys($de);
+   foreach ($k as $key) {
+     $ndar_keys[] = $key;
+   }
+}
+print("Print keys from NDA: \n");
+echo(json_encode(array_unique($ndar_keys), JSON_PRETTY_PRINT));
+
 // print information about this project
 $data = array(
     'token' => $token,
