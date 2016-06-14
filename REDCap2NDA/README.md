@@ -22,3 +22,9 @@ php queryREDCap.php
 ```
 which will create a directory 'cache'. Inside you will find a json file for each instrument.
 
+### convert a redcap dictionary into NDAR
+
+The conversion needs a mapping_keys.json file that contains the mappings from redcap to ndar names for data dictionaries. You can apply this transform by:
+```
+./redcap2ndar.sh read cache/instrument_bisbas_for_children_score.json output
+```
