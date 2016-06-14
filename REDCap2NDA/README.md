@@ -13,9 +13,12 @@ Provide this information in your tokens.json file:
 ```
 cp tokens.json_master tokens.json
 ```
-And run the pull data script:
+
+### Download Instruments from REDCap
+
+Run the pull data script:
 ```
 php queryREDCap.php
 ```
+which will create a directory 'cache'. Inside you will find a json file for each instrument.
 
-This should create a directory structure with the information of each instrument in this project (see cache/.cache*).

@@ -6,7 +6,9 @@
   $token = $tokens[1];
 
   $c = 'cache/';
-  mkdir($c, 0700);
+  if (!is_dir($c)) {
+     mkdir($c, 0700);
+  }
 
   print('try to connect with '. $url . ' and token ' . $token . '.' . "\n". 'Get data about all instruments in this project.'. "\n");
 
@@ -32,7 +34,7 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
 $output = curl_exec($ch);
 $j = json_decode($output, TRUE);
 echo(json_encode($j, JSON_PRETTY_PRINT). "\n");
-file_put_contents($c.'.cache_project_info', json_encode($j, JSON_PRETTY_PRINT));
+file_put_contents($c.'project_info.json', json_encode($j, JSON_PRETTY_PRINT));
 curl_close($ch);
 
 
@@ -58,8 +60,8 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
 $output = curl_exec($ch);
 //print $output;
 $j = json_decode($output, TRUE);
-echo(json_encode($j, JSON_PRETTY_PRINT));
-file_put_contents($c.'.cache_instruments_info', json_encode($j, JSON_PRETTY_PRINT));
+echo(json_encode($j, JSON_PRETTY_PRINT)."\n");
+file_put_contents($c.'instruments.json', json_encode($j, JSON_PRETTY_PRINT));
 curl_close($ch);
 
 // for the list of instruments we can ask for the data dictionary
@@ -84,7 +86,7 @@ curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
 $output = curl_exec($ch);
 $inst = json_decode($output, TRUE);
-file_put_contents($c.'.cache_instruments_'.$value['instrument_name'], json_encode($inst, JSON_PRETTY_PRINT));
+file_put_contents($c.'instrument_'.$value['instrument_name'].'.json', json_encode($inst, JSON_PRETTY_PRINT));
 echo("copy down: ".$value['instrument_name']."\n");
 curl_close($ch);
 }
