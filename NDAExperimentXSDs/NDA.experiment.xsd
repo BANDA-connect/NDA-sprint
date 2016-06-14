@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NIMH Data Archives (NDA) resource Experiment object XML specification -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:eeg="NDA.eeg_experiment" 
+  xmlns:eye="NDA.eye_experiment" 
+  xmlns:fmri="NDA.fmri_experiment"
+  xmlns:egg="NDA.egg_experiment"
+  targetNamespace="NDA.experiment">
+  <xs:import schemaLocation="NDA.common.xsd" namespace="NDA.common"/>
+  <xs:import schemaLocation="NDA.eeg_experiment.xsd" namespace="NDA.eeg_experiment"/>
+  <xs:import schemaLocation="NDA.eye_experiment.xsd" namespace="NDA.eye_experiment"/>
+  <xs:import schemaLocation="NDA.fmri_experiment.xsd" namespace="NDA.fmri_experiment"/>
+  <xs:import schemaLocation="NDA.egg_experiment.xsd" namespace="NDA.egg_experiment"/>
+  <xs:element name="EXPERIMENT">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="fMRI" type="fmri:fmri_experiment"/>
+        <xs:element name="EEG" type="eeg:eeg_experiment"/>
+        <xs:element name="Eye_Tracking" type="eye:eye_experiment"/>
+        <xs:element name="EGG" type="egg:egg_experiment"/>
+     </xs:choice>
+      <xs:attribute type="xs:positiveInteger" name="experiment_id" use="optional"/>
+      <xs:attribute type="xs:string" name="experiment_name" use="required"/>
+  </xs:complexType>
+  </xs:element>
+</xs:schema>

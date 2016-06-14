@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="NDA.common"
+    xmlns:fmri="NDA.fmri_experiment" targetNamespace="NDA.fmri_experiment">
+    <xs:import schemaLocation="NDA.common.xsd" namespace="NDA.common"/>
+
+    <xs:complexType name="fmri_hierarchical_trees">
+        <xs:all>
+            <xs:element name="Equipment_Scanner" minOccurs="1">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Software" minOccurs="1">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Equipment_Stimuli" minOccurs="1">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="fmri_block_elements">
+        <xs:all>
+            <xs:element name="trial_count" type="com:trial_count" minOccurs="1"/>
+            <xs:element name="trial_duration" type="com:trial_duration" minOccurs="1"/>
+            <xs:element name="video_stimuli" type="com:video_stimuli" minOccurs="1"/>          
+            <xs:element name="audio_stimuli" type="com:audio_stimuli" minOccurs="1"/>
+            <!--relaxing until we can support file submission by xml-->
+            <xs:element name="block_design_file_id" type="com:block_design_file_id" minOccurs="0"/>
+            <xs:element name="has_eeg" type="com:has_eeg" minOccurs="0" default="false"/>
+            <xs:element name="has_eye_tracking" type="com:has_eye_tracking" minOccurs="0" default="false"/>
+            <xs:element name="video_file_id" type="com:video_file_id" minOccurs="0"/>
+            <xs:element name="audio_file_id" type="com:audio_file_id" minOccurs="0"/>
+            <xs:element name="event_name" type="com:event_name" minOccurs="1"/>            
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="fmri_post_processing_elements">
+        <xs:all>
+            <xs:element name="roi" type="com:roi" minOccurs="1"/>            
+            <xs:element name="roi_count" type="com:roi_count" minOccurs="1"/>
+            <!--relaxing until we can support file submission by xml-->
+            <xs:element name="roi_file_id" type="com:roi_file_id" minOccurs="0"/>
+            <xs:element name="data_inclusion_notes" type="com:data_inclusion_notes" minOccurs="1"/>
+            <xs:element name="data_file_specifications" type="com:data_file_specifications" minOccurs="1"/>
+            <!--relaxing until we can support file submission by xml-->
+            <xs:element name="acquisition_file_id" type="com:acquisition_file_id" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="fmri_experiment">
+        <xs:all>
+            <xs:element name="SECTIONS">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="ACQUISITION">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="HIERARCHICAL_TREES"
+                                        type="fmri:fmri_hierarchical_trees"/>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="BLOCK_EVENT_DESIGN">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="BLOCK" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:all>
+                                                <xs:element name="EXPERIMENT_ELEMENTS"
+                                                  type="fmri:fmri_block_elements"/>
+                                            </xs:all>
+                                            <xs:attribute name="block_id" type="xs:positiveInteger"
+                                                use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            <xs:unique name="oneBlockID">
+                                <xs:selector xpath="BLOCK"/>
+                                <xs:field xpath="@block_id"/>
+                            </xs:unique>
+                        </xs:element>
+                        <xs:element name="POST_PROCESSING">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                        type="fmri:fmri_post_processing_elements"/>
+                                    <xs:element name="NO_POST_PROCESSING" type="com:NO_POST_PROCESSING"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>

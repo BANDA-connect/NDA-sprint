@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="NDA.common"
+           xmlns:egg="NDA.egg_experiment" targetNamespace="NDA.egg_experiment">
+    <xs:import schemaLocation="NDA.common.xsd" namespace="NDA.common"/>
+
+    <xs:complexType name="egg_hierarchical_trees">
+        <xs:all>
+            <xs:element name="Equipment" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Electrode_Schema" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Software" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="egg_acquisition_elements">
+        <xs:all>
+            <xs:element name="acquisition_filter" type="com:acquisition_filter" minOccurs="1"/>
+            <xs:element name="acquisition_sample_rate" type="com:acquisition_sample_rate" minOccurs="1"/>
+            <xs:element name="acquisition_recording_type" type="com:acquisition_recording_type" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="egg_block_elements">
+        <xs:all>
+            <xs:element name="event_identifier" type="com:event_identifier" minOccurs="1"/>
+            <xs:element name="stimuli_description" type="com:stimuli_description" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="egg_post_processing_elements">
+        <xs:all>
+            <xs:element name="processing_filter" type="com:processing_filter" minOccurs="1"/>
+            <xs:element name="processing_data_inclusion" type="com:processing_data_inclusion" minOccurs="0"/>
+            <xs:element name="data_inclusion_notes" type="com:data_inclusion_notes" minOccurs="0"/>
+            <xs:element name="data_file_specifications" type="com:data_file_specifications" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="egg_experiment">
+        <xs:all>
+            <xs:element name="SECTIONS">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="ACQUISITION">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="HIERARCHICAL_TREES"
+                                                type="egg:egg_hierarchical_trees"/>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                                type="egg:egg_acquisition_elements"/>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="BLOCK_EVENT_DESIGN">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="block_sequence_description" type="com:block_sequence_description" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="BLOCK" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:all>
+                                                <xs:element name="EXPERIMENT_ELEMENTS"
+                                                            type="egg:egg_block_elements"/>
+                                            </xs:all>
+                                            <xs:attribute name="block_id" type="xs:positiveInteger"
+                                                          use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            <xs:unique name="oneBlockID">
+                                <xs:selector xpath="BLOCK"/>
+                                <xs:field xpath="@block_id"/>
+                            </xs:unique>
+                        </xs:element>
+                        <xs:element name="POST_PROCESSING">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                                type="egg:egg_post_processing_elements"/>
+                                    <xs:element name="NO_POST_PROCESSING" type="com:NO_POST_PROCESSING"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+
+</xs:schema>

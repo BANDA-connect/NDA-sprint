@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="NDA.common"
+    xmlns:eeg="NDA.eeg_experiment" targetNamespace="NDA.eeg_experiment" >
+    <xs:import schemaLocation="NDA.common.xsd" namespace="NDA.common"/>
+
+    <xs:complexType name="eeg_hierarchical_trees">
+        <xs:all>
+            <xs:element name="Equipment" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EEG_Amplifier" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Electrode_Schema" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Software" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="eeg_acquisition_elements">
+        <xs:all>
+            <xs:element name="acquisition_filter" type="com:acquisition_filter" minOccurs="1"/>            
+            <xs:element name="acquisition_sample_rate" type="com:acquisition_sample_rate" minOccurs="1"/>
+            <xs:element name="acquisition_recording_type" type="com:acquisition_recording_type" minOccurs="1"/>          
+            <xs:element name="acquisition_amplification" type="com:acquisition_amplification" minOccurs="1"/>       
+            <xs:element name="acquisition_electrode_imped" type="com:acquisition_electrode_imped" minOccurs="1"/>
+            <xs:element name="acquisition_electrodes_count" type="com:acquisition_electrodes_count" minOccurs="1"/>
+            <!--relaxing until we can support file submission by xml-->
+            <xs:element name="acquisition_calibration_file" type="com:acquisition_calibration_file" minOccurs="0"/>
+            <!--relaxing until we can support file submission by xml-->
+            <xs:element name="acquisition_position_file" type="com:acquisition_position_file" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="eeg_block_elements">
+        <xs:all>
+            <xs:element name="event_identifier" type="com:event_identifier" minOccurs="1"/>    
+            <xs:element name="condition_description" type="com:condition_description" minOccurs="1"/>          
+            <xs:element name="stimuli_description" type="com:stimuli_description" minOccurs="1"/>         
+            <xs:element name="behavioral_responses" type="com:behavioral_responses" minOccurs="0"/>     
+            <xs:element name="condition_label" type="com:condition_label" minOccurs="0"/>        
+            <xs:element name="duration" type="com:duration" minOccurs="1"/>
+            <xs:element name="condition_tag" type="com:condition_tag" minOccurs="0"/>
+            <xs:element name="stimuli_file_id" type="com:stimuli_file_id" minOccurs="0"/>
+            <xs:element name="behavioral_monitoring" type="com:behavioral_monitoring_list"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="eeg_post_processing_elements">
+        <xs:all>
+            <xs:element name="processing_filter" type="com:processing_filter" minOccurs="1"/>          
+            <xs:element name="processing_baseline_correction" type="com:processing_baseline_correction" minOccurs="1"/>       
+            <xs:element name="processing_averaging" type="com:processing_averaging" minOccurs="0"/>
+            <xs:element name="processing_artifact_detection" type="com:processing_artifact_detection" minOccurs="0"/>       
+            <xs:element name="processing_data_inclusion" type="com:processing_data_inclusion" minOccurs="0"/>         
+            <xs:element name="data_inclusion_notes" type="com:data_inclusion_notes" minOccurs="0"/>           
+            <xs:element name="processing_bad_channel" type="com:processing_bad_channel" minOccurs="1"/>        
+            <xs:element name="processing_segmentation" type="com:processing_segmentation" minOccurs="1"/>   
+            <xs:element name="processing_data_reduction" type="com:processing_data_reduction" minOccurs="0"/>
+            <xs:element name="processing_re_referencing" type="com:processing_re_referencing" minOccurs="0"/>            
+            <xs:element name="processing_artifact_other" type="com:processing_artifact_other" minOccurs="0"/>            
+            <xs:element name="data_file_specifications" type="com:data_file_specifications" minOccurs="0"/>           
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="eeg_experiment">
+        <xs:all>
+            <xs:element name="SECTIONS">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="ACQUISITION">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="HIERARCHICAL_TREES"
+                                        type="eeg:eeg_hierarchical_trees"/>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                        type="eeg:eeg_acquisition_elements"/>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="BLOCK_EVENT_DESIGN">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="block_sequence_description" type="com:block_sequence_description" minOccurs="1" maxOccurs="1"/>  
+                                    <xs:element name="block_misc_file" type="com:block_misc_file" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="BLOCK" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:all>
+                                                <xs:element name="EXPERIMENT_ELEMENTS"
+                                                  type="eeg:eeg_block_elements"/>
+                                            </xs:all>
+                                            <xs:attribute name="block_id" type="xs:positiveInteger"
+                                                use="required"/>
+                                        </xs:complexType>                                        
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            <xs:unique name="oneBlockID">
+                                <xs:selector xpath="BLOCK"/>
+                                <xs:field xpath="@block_id"/>
+                            </xs:unique>
+                        </xs:element>
+                        <xs:element name="POST_PROCESSING">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                        type="eeg:eeg_post_processing_elements"/>
+                                    <xs:element name="NO_POST_PROCESSING" type="com:NO_POST_PROCESSING"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+
+</xs:schema>

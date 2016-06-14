@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="NDA.common"
+    xmlns:eye="NDA.eye_experiment" targetNamespace="NDA.eye_experiment">
+    <xs:import schemaLocation="NDA.common.xsd" namespace="NDA.common"/>
+    <xs:complexType name="eye_hierarchical_trees">
+        <xs:all>
+            <xs:element name="Equipment" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Software" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="com:Tree_Element_Type" name="Tree_Element"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="eye_acquisition_elements">
+        <xs:all>
+            <xs:element name="summary_visits" type="com:summary_visits" minOccurs="1"/>         
+            <xs:element name="fixation_identification" type="com:fixation_identification" minOccurs="1"/>
+            <xs:element name="saccades_identification" type="com:saccades_identification" minOccurs="1"/>
+            <xs:element name="horizontal_stimuli_cm" type="com:horizontal_stimuli_cm" minOccurs="1"/>
+            <xs:element name="vertical_stimuli_cm" type="com:vertical_stimuli_cm" minOccurs="1"/>
+            <xs:element name="horizontal_stimuli_degree" type="com:horizontal_stimuli_degree" minOccurs="1"/>
+            <xs:element name="vertical_stimuli_degree" type="com:vertical_stimuli_degree" minOccurs="1"/>
+            <xs:element name="horizontal_monitor_resolution" type="com:horizontal_monitor_resolution" minOccurs="1"/>
+            <xs:element name="vertical_monitor_resolution" type="com:vertical_monitor_resolution" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>    
+    <xs:complexType name="eye_block_elements">
+        <xs:all>
+            <xs:element name="sampling_rate" type="com:sampling_rate" minOccurs="1"/>
+            <xs:element name="duration" type="com:duration" minOccurs="1"/>           
+            <xs:element name="stimuli" type="com:stimuli" minOccurs="1"/>      
+            <xs:element name="color_depth" type="com:color_depth_list" minOccurs="1"/>
+            <xs:element name="auditory_stimuli" type="com:auditory_stimuli" minOccurs="1" default="false"/>
+            <xs:element name="audio_sampling_rate" type="com:audio_sampling_rate" minOccurs="0"/>
+            <xs:element name="audio_stimuli" type="com:audio_stimuli" minOccurs="0"/>
+            <xs:element name="horizontal_visual_angle" type="com:horizontal_visual_angle" minOccurs="1"/>
+            <xs:element name="vertical_visual_angle" type="com:vertical_visual_angle" minOccurs="1"/>
+            <xs:element name="block_design_file_id" type="com:block_design_file_id" minOccurs="0"/>
+            <xs:element name="horizontal_stimuli_resolution" type="com:horizontal_stimuli_resolution" minOccurs="1"/>
+            <xs:element name="vertical_stimuli_resolution" type="com:vertical_stimuli_resolution" minOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="eye_post_processing_elements">
+        <xs:all>
+            <xs:element name="roi" type="com:roi" minOccurs="1"/>
+            <xs:element name="roi_count" type="com:roi_count" minOccurs="1"/>
+            <!--relaxing until we can support file submission by xml-->
+            <xs:element name="roi_file_id" type="com:roi_file_id" minOccurs="0"/>
+            <xs:element name="trial_count" type="com:trial_count" minOccurs="1"/>
+            <xs:element name="data_inclusion_notes" type="com:data_inclusion_notes" minOccurs="1"/> 
+            <xs:element name="data_file_specifications" type="com:data_file_specifications" minOccurs="1"/>            
+            <xs:element name="horizontal_roi_angle" type="com:horizontal_roi_angle" minOccurs="1"/>
+            <xs:element name="vertical_roi_angle" type="com:vertical_roi_angle" minOccurs="1"/>
+            
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="eye_experiment">
+        <xs:all>
+            <xs:element name="SECTIONS">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="ACQUISITION">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="HIERARCHICAL_TREES"
+                                        type="eye:eye_hierarchical_trees"/>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                        type="eye:eye_acquisition_elements"/>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="BLOCK_EVENT_DESIGN">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="BLOCK" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:all>
+                                                <xs:element name="EXPERIMENT_ELEMENTS"
+                                                  type="eye:eye_block_elements"/>
+                                            </xs:all>
+                                            <xs:attribute name="block_id" type="xs:positiveInteger"
+                                                use="required"/>
+                                        </xs:complexType>                                       
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            <xs:unique name="oneBlockID">
+                                <xs:selector xpath="BLOCK"/>
+                                <xs:field xpath="@block_id"/>
+                            </xs:unique>
+                        </xs:element>
+                        <xs:element name="POST_PROCESSING">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="EXPERIMENT_ELEMENTS"
+                                        type="eye:eye_post_processing_elements"/>
+                                    <xs:element name="NO_POST_PROCESSING" type="com:NO_POST_PROCESSING"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+
+
+</xs:schema>

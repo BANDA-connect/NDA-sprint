@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NIMH Data Archives (NDA) resource Common object XML specification -->
+<!-- $Id: NDA.common.xsd,v 1.0 2015/10/28 12:58:00 obenshaindw $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="NDA.common"
+  targetNamespace="NDA.common">
+
+  <xs:simpleType name="experiment_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EEG"/>
+      <xs:enumeration value="Eye Tracking"/>
+      <xs:enumeration value="fMRI"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Tree_Element_Type">
+    <xs:sequence>
+      <xs:element name="Tree_Element" type="com:Tree_Element_Type" minOccurs="0"
+        maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:positiveInteger" use="optional"/>
+    <xs:attribute name="selected" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="NDAFile">
+    <xs:simpleContent>
+      <xs:extension base="xs:positiveInteger">
+        <xs:attribute name="description" type="xs:string" use="optional"/>
+        <xs:attribute name="file_name" type="xs:string" use="optional"/>
+        <xs:attribute name="file_path" type="xs:anyURI" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="behavioral_monitoring_list">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Video Recording"/>
+      <xs:enumeration value="Audio Recording"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="color_depth_list">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="250"/>
+      <xs:enumeration value="8-bit"/>
+      <xs:enumeration value="16-bit"/>
+      <xs:enumeration value="24-bit"/>
+      <xs:enumeration value="32-bit"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="trial_count">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="trial_duration">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="video_stimuli">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="audio_stimuli">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="block_design_file_id">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="has_eeg">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="has_eye_tracking">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:complexType name="video_file_id">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="audio_file_id">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="event_name">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="250"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="summary_visits">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="fixation_identification">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="saccades_identification">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="horizontal_stimuli_cm">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="vertical_stimuli_cm">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="horizontal_stimuli_degree">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="vertical_stimuli_degree">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="horizontal_stimuli_resolution">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="vertical_stimuli_resolution">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="horizontal_monitor_resolution">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="vertical_monitor_resolution">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="sampling_rate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="stimuli">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="auditory_stimuli">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="audio_sampling_rate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="vertical_visual_angle">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="horizontal_visual_angle">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="roi_count">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:complexType name="roi_file_id">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="data_inclusion_notes">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="data_file_specifications">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="horizontal_roi_angle">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="vertical_roi_angle">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="acquisition_filter">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="acquisition_sample_rate">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="acquisition_recording_type">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="acquisition_amplification">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="acquisition_electrode_imped">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="acquisition_electrodes_count">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:complexType name="acquisition_calibration_file">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="acquisition_position_file">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="event_identifier">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="500"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="condition_description">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="stimuli_description">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="behavioral_responses">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="condition_label">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="duration">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+  <xs:simpleType name="condition_tag">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="stimuli_file_id">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="processing_filter">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_baseline_correction">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_averaging">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_artifact_detection">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_data_inclusion">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_bad_channel">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_segmentation">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_data_reduction">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType> 
+  <xs:simpleType name="processing_re_referencing">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_artifact_other">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processing_file_specification">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="roi">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="acquisition_file_id">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="block_sequence_description">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="4000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="block_misc_file">
+    <xs:complexContent>
+      <xs:restriction base="com:NDAFile"/>
+    </xs:complexContent>
+  </xs:complexType> 
+  <xs:complexType name="NO_POST_PROCESSING">
+    <xs:attribute name="has_post_processing" type="xs:boolean" use="optional" default="false"/>
+  </xs:complexType>
+</xs:schema>
