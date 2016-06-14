@@ -1,0 +1,43 @@
+{
+  "AccessionNumber": "", 
+  "AcquisitionMatrix": "[0, 320, 320, 0]", 
+  "ClassifyType": [
+    "GE", 
+    "original", 
+    "ABCD-T1"
+  ], 
+  "EchoTime": "2.364", 
+  "ImageType": "['ORIGINAL', 'PRIMARY', 'OTHER']", 
+  "ImagesInAcquisition": "208", 
+  "IncomingConnection": {
+    "AETitleCalled": "DAICFIONA", 
+    "AETitleCaller": "CTIPMUCSD2", 
+    "CallerIP": "172.16.132.126"
+  }, 
+  "InstanceNumber": "12", 
+  "Manufacturer": "GE MEDICAL SYSTEMS", 
+  "ManufacturerModelName": "DISCOVERY MR750", 
+  "Modality": "MR", 
+  "NumFiles": "208", 
+  "PatientID": "G031_ABCD01_160607", 
+  "PatientName": "G031_ABCD01_160607", 
+  "Private0019_10BB": "0.000000", 
+  "Private0043_1039": [
+    0, 
+    1073741824, 
+    0, 
+    0
+  ], 
+  "PulseSequenceName": "research/mprage_promo", 
+  "RepetitionTime": "5.576", 
+  "ScanningSequence": "RM", 
+  "SeriesDescription": "Sag_MPRAGE_T1", 
+  "SeriesInstanceUID": "1.2.840.113619.2.374.15512023.5825816.14098.1465329946.901", 
+  "SeriesNumber": "2", 
+  "SliceLocation": "-82.17449951", 
+  "SliceSpacing": "0.8", 
+  "SliceThickness": "0.8", 
+  "StudyDate": "20160607", 
+  "StudyInstanceUID": "1.2.840.113619.6.374.165730995738660315566670893404332490344", 
+  "StudyTime": "155930"
+}

@@ -1,0 +1,261 @@
+[
+  { "type" : "GE",
+    "id" : "GEBYMANUFACTURER",
+    "description" : "This scan is from GE",
+    "rules" : [
+      { 
+        "tag": [ "0x08", "0x70"],
+        "value": "^GE MEDICAL"
+      }
+    ]  
+  },
+  { "type" : "SIEMENS",
+    "id" : "SIEMENSBYMANUFACTURER",
+    "description" : "This scan is from SIEMENS",
+    "rules" : [
+      { 
+        "tag": [ "0x08", "0x70"],
+        "value": "^SIEMENS"
+      }
+    ]  
+  },
+  { "type" : "PHILIPS",
+    "id" : "PHILIPSBYMANUFACTURER",
+    "description" : "This scan is from Philips",
+    "rules" : [
+      { 
+        "tag": [ "0x08", "0x70"],
+        "value": "^Philips"
+      }
+    ]  
+  },
+  {
+      "type" : "mosaic",
+      "description": "Siemens Mosaic format",
+      "id" : "MOSAIC",
+      "rules": [
+          {
+	     "tag": [ "0x08", "0x08" ],
+             "value": "MOSAIC",
+	     "operator": "contains"
+          },
+	  {
+	     "rule": "SIEMENSBYMANUFACTURER"
+	  }
+      ]
+  },
+  {
+      "type" : "original",
+      "description": "original Image format (not derived)",
+      "id" : "ORIGINAL",
+      "rules": [
+          {
+	     "tag": [ "0x08", "0x08" ],
+             "value": "ORIGINAL",
+	     "operator": "contains"
+          }
+      ]
+  },
+  {
+      "type" : "localizer",
+      "description": "A localizer scan, has been classified before as axial, sagittal and coronal",
+      "rules": [
+          {
+	      "tag": [ "ClassifyType" ],
+	      "value": "axial" ,
+	      "operator": "contains"
+	  },
+          {
+	      "tag": [ "ClassifyType" ],
+	      "value": "coronal",
+	      "operator": "contains"
+	  },
+          {
+	      "tag": [ "ClassifyType" ],
+	      "value": "sagittal",
+	      "operator": "contains"
+	  }
+      ]
+  },
+  { "type" : "ABCD-T1",
+    "description" : "A T1 weighted image from GE and as EFGRE3D",
+    "rules" : [
+      {
+	"rule" : "GEBYMANUFACTURER"
+      },{ 
+        "tag": [ "AcquisitionMatrix" ],
+        "value": "0, 320, 320, 0"
+      },{ 
+        "tag": [ "0x19", "0x109c"],
+        "value": "research/mprage_promo"
+      }
+    ]
+  },
+  { 
+    "type" : "ABCD-T1",
+    "description" : "A T1 weighted image from Siemens with ABCD resolution",
+    "rules" : [
+      {
+	"rule" : "SIEMENSBYMANUFACTURER"
+      },{ 
+        "tag": [ "0x28", "0x10" ],
+        "operator": "==",
+        "value": "320"
+      }
+      ,{ 
+        "tag": [ "0x18", "0x89" ],
+        "operator": "==",
+        "value": "299"
+      },{ 
+        "tag": [ "0x18", "0x24" ],
+        "value": "tfl3d1_16ns"
+      }
+    ]
+  },
+  { 
+    "type" : "ABCD-T2",
+    "description" : "A T2 weighted image from Siemens with ABCD resolution",
+    "rules" : [
+      {
+	"rule" : "SIEMENSBYMANUFACTURER"
+      },{ 
+       "tag": [ "0x28", "0x10" ],
+        "operator": "==",
+        "value": "320"
+      }
+      ,{ 
+        "tag": [ "0x18", "0x89" ],
+        "operator": "==",
+        "value": "289" 
+      },{ 
+        "tag": [ "0x18", "0x24" ],
+        "value": "spc_314ns"
+      }
+    ]
+  },
+  { 
+    "type" : "ABCD-Diffusion-FM",
+    "description" : "Field Maps for ABCD Diffusion scan",
+    "rules" : [
+      {
+	"rule" : "SIEMENSBYMANUFACTURER"
+      },{
+	"rule" : "ORIGINAL"
+      },{ 
+       "tag": [ "0x28", "0x10" ],
+        "operator": "==",
+        "value": "140"
+      }
+      ,{ 
+        "tag": [ "0x18", "0x89" ],
+        "operator": "==",
+        "value": "105" 
+      },{ 
+        "tag": [ "0x18", "0x24" ],
+        "value": "ep_b0"
+      }
+    ]
+  },
+  { 
+    "type" : "ABCD-DTI",
+    "description" : "ABCD Diffusion scan",
+    "rules" : [
+      {
+	"rule" : "SIEMENSBYMANUFACTURER"
+      },{
+	"rule" : "ORIGINAL"
+      },{
+	"rule" : "MOSAIC"
+      },{ 
+       "tag": [ "0x28", "0x10" ],
+        "operator": "==",
+        "value": "1260"
+      }
+      ,{ 
+        "tag": [ "0x18", "0x89" ],
+        "operator": "==",
+        "value": "105" 
+      },{ 
+        "tag": [ "0x18", "0x24" ],
+        "value": "ep_b0"
+      }
+    ]
+  },
+  { 
+    "type" : "ABCD-fMRI-NBACK",
+    "description" : "ABCD Nback fMRI scan",
+    "rules" : [
+      {
+	"rule" : "SIEMENSBYMANUFACTURER"
+      },{
+	"rule" : "ORIGINAL"
+      },{ 
+       "tag": [ "0x28", "0x10" ],
+        "operator": "==",
+        "value": "936"
+      }
+      ,{ 
+        "tag": [ "0x18", "0x89" ],
+        "operator": "==",
+        "value": "91" 
+      },{ 
+        "tag": [ "SequenceName" ],
+        "value": "epfSM2d1_104"
+      },{ 
+        "tag": [ "AcquisitionLength" ],
+        "value": "TA 05:12"
+      }
+    ]
+  },    
+  { 
+    "type" : "ABCD-fMRI-FM",
+    "description" : "Field Maps for ABCD Diffusion scan",
+    "rules" : [
+      {
+	"rule" : "SIEMENSBYMANUFACTURER"
+      },{
+	"rule" : "ORIGINAL"
+      },{ 
+       "tag": [ "0x28", "0x10" ],
+        "operator": "==",
+        "value": "104"
+      }
+      ,{ 
+        "tag": [ "0x18", "0x89" ],
+        "operator": "==",
+        "value": "91" 
+      },{ 
+        "tag": [ "0x18", "0x24" ],
+        "value": "epse2d1_104"
+      }
+    ]
+  },
+  {
+      "type" : "GEDTI",
+      "id" : "GEDTI",
+      "description": "GE based MMIL DTI format",
+      "rules": [
+          {
+	     "tag": [ "0x19", "0x109c" ],
+             "value": "^epi2_pepolar$"
+          },
+	  {
+	     "rule": "GEBYMANUFACTURER"
+	  }
+      ]
+  },
+  {
+      "type" : "GERSI",
+      "id" : "GERSI",
+      "description": "GE based MMIL RSI format",
+      "rules": [
+          {
+	     "tag": [ "0x19", "0x109c" ],
+             "value": "^epi2_pepolarFLEX"
+          },
+	  {
+	     "rule": "GEBYMANUFACTURER"
+	  }
+      ]
+  }
+]
