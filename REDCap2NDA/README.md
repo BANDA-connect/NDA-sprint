@@ -1,5 +1,7 @@
 ## REDCap conversion to NDA data structures
 
+Currently this project is limited to REDCap data dictionary to NDA data dictionary translations only. Missing are actual data upload features.
+
 ###How to use
 
 You need access to a REDCap system. We provide a role account for this BANDA.
