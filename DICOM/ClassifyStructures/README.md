@@ -8,4 +8,4 @@ There is one example for a classification on a study level which specifies of a 
 
 ### Resources
 
-These files have been created using the processSingleFile DICOM ingestion tool that is based on DICOM send/receive jobs (see ![ABCD-STUDY/FIONASITE/server/bin](https://github.com/ABCD-STUDY/FIONASITE/blob/master/server/bin/processSingleFile.py) ).
+These files have been created using the processSingleFile DICOM ingestion tool that is based on DICOM send/receive jobs (see https://github.com/ABCD-STUDY/FIONASITE/blob/master/server/bin/processSingleFile.py ).
