@@ -36,6 +36,9 @@
       .Archived {
          background-color: MistyRose;
       }
+      .container-fluid {
+         margin: 10px;
+      }
     </style>
 
   </head>
@@ -44,7 +47,7 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -61,21 +64,21 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
          <h4>Available categories</h4>
          <div id="categories"></div>
       </div>
     </div>
     <hr>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
          <h4>Available data structures <span class="small dataname"></span></h4>
          <div id="datastructures"></div>
       </div>
     </div>
     <hr>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
          <h4>Known measures <span class="small measurename"></span></h4>
          <div id="content"></div>
