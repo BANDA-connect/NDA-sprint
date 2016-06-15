@@ -25,9 +25,18 @@
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <style>
+      .Published {
+         background-color: lightgray;
+      }
+      .Archived {
+         background-color: MistyRose;
+      }
+    </style>
 
   </head>
 
@@ -42,6 +51,12 @@
             <span class="icon-bar"></span>
           </a>
           <a class="navbar-brand" href="#">NDAR data dictionary resource</a>
+	  <div class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" id="searchAllVal" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" href="#" id="searchAll" class="btn btn-default">Magic</button>
+	  </div>
         </div>
       </div>
     </div>
@@ -81,6 +96,13 @@
 
       jQuery(document).ready(function() {
 
+        jQuery('#searchAll').click(function() {
+           var term = jQuery('#searchAllVal').val();
+           console.log("search for this" + term );
+           // now we troll the whole NDA dictionary
+        });
+
+
         jQuery('#datastructures').on('click', '.entry', function() {
            jQuery('#content').children().remove();
            var v = jQuery(this).find('span.shortName').text();
@@ -88,8 +110,12 @@
            jQuery.getJSON('NDAR_datastructures.php?entry='+v, function(data) {
               // console.log("got some data");
               jQuery.each(data.dataElements, function(index, value) {
+                var n = "normal";
+                if (data.status == "Archived") {
+                   n = " (archived, don't use)";
+                }
                 jQuery('#content').append('<div class="vals col-xs-3">' + 
-	           '<a href="https://ndar.nih.gov/ndar_data_dictionary.html?short_name='+ v + '">' + '<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></a> <span class="title">' + value.name + '</span><br/><span class="description"><i>' + value.description + '</i></span></div>');
+	           '<a href="https://ndar.nih.gov/ndar_data_dictionary.html?short_name='+ v + '">' + '<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></a> <span class="title">' + value.name + '</span>'+n+'<br/><span class="description"><i>' + value.description + '</i></span></div>');
               });
            });
         });
@@ -127,7 +153,7 @@
           });
 
           jQuery.each(data, function(index, value) {
-             jQuery('#datastructures').append('<div class="col-xs-2 entry"><span class="nr">' + index + '</span>: <span class="shortName" ndarURL="'
+             jQuery('#datastructures').append('<div class="col-xs-2 entry"><span class="nr">' + index + '</span>: <span class=\"shortName '+ value.status +'\" ndarURL=\"'
 		+ value.ndarURL+ '">' + value.shortName + '</span><br/><span class="title">'+ value.title+'</span>' +
 	        '<span class="category">'+value.categories[0]+'</span></div>');
           });
