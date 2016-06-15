@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<data_submission>
+  <data_set type="Imaging">
+    <folder name="C:\Users\obenshaindw\Documents\BANDA-connect\SampleSubmission\image03.csv">
+      <data_structure name="image03" version="03">
+        <data_element name="subjectkey"><![CDATA[NDAR_INV4M8DDJ1M]]></data_element>
+        <data_element name="src_subject_id"><![CDATA[NDAR_INV4M8DDJ1M]]></data_element>
+        <data_element name="magnetic_field_strength"><![CDATA[]]></data_element>
+        <data_element name="experiment_id"><![CDATA[]]></data_element>
+        <data_element name="scanner_manufacturer_pd"><![CDATA[]]></data_element>
+        <data_element name="scanner_type_pd"><![CDATA[]]></data_element>
+        <data_element name="mri_repetition_time_pd"><![CDATA[]]></data_element>
+        <data_element name="mri_echo_time_pd"><![CDATA[]]></data_element>
+        <data_element name="flip_angle"><![CDATA[]]></data_element>
+        <data_element name="acquisition_matrix"><![CDATA[]]></data_element>
+        <data_element name="mri_field_of_view_pd"><![CDATA[]]></data_element>
+        <data_element name="patient_position"><![CDATA[]]></data_element>
+        <data_element name="photomet_interpret"><![CDATA[]]></data_element>
+        <data_element name="image_extent4"><![CDATA[]]></data_element>
+        <data_element name="extent4_type"><![CDATA[]]></data_element>
+        <data_element name="image_extent5"><![CDATA[]]></data_element>
+        <data_element name="extent5_type"><![CDATA[]]></data_element>
+        <data_element name="image_unit4"><![CDATA[]]></data_element>
+        <data_element name="image_unit5"><![CDATA[]]></data_element>
+        <data_element name="interview_date"><![CDATA[01/26/1995 00:00:00 EST]]></data_element>
+        <data_element name="interview_age"><![CDATA[32]]></data_element>
+        <data_element name="gender"><![CDATA[M]]></data_element>
+        <data_element name="image_file"><![CDATA[image03/NDAR_INV4M8DDJ1M_image03_1325522820658.gz]]></data_element>
+        <data_element name="image_thumbnail_file"><![CDATA[image03/NDAR_INV4M8DDJ1M_image03_1325522820658.jpg]]></data_element>
+        <data_element name="image_description"><![CDATA[MRI]]></data_element>
+        <data_element name="image_file_format"><![CDATA[AFNI]]></data_element>
+        <data_element name="image_modality"><![CDATA[MRI]]></data_element>
+        <data_element name="transformation_performed"><![CDATA[Yes]]></data_element>
+        <data_element name="transformation_type"><![CDATA[tlrc]]></data_element>
+        <data_element name="image_history"><![CDATA[]]></data_element>
+        <data_element name="image_num_dimensions"><![CDATA[3]]></data_element>
+        <data_element name="image_extent1"><![CDATA[161]]></data_element>
+        <data_element name="image_extent2"><![CDATA[191]]></data_element>
+        <data_element name="image_extent3"><![CDATA[10]]></data_element>
+        <data_element name="image_unit1"><![CDATA[Millimeters]]></data_element>
+        <data_element name="image_unit2"><![CDATA[Millimeters]]></data_element>
+        <data_element name="image_unit3"><![CDATA[Millimeters]]></data_element>
+        <data_element name="image_resolution1"><![CDATA[1]]></data_element>
+        <data_element name="image_resolution2"><![CDATA[1]]></data_element>
+        <data_element name="image_resolution3"><![CDATA[1]]></data_element>
+        <data_element name="image_slice_thickness"><![CDATA[1]]></data_element>
+        <data_element name="image_orientation"><![CDATA[Axial]]></data_element>
+        <data_element name="scan_object"><![CDATA[Phantom]]></data_element>
+        <data_element name="scan_type"><![CDATA[MR structural (T1)]]></data_element>
+      </data_structure>
+    </folder>
+  </data_set>
+</data_submission>

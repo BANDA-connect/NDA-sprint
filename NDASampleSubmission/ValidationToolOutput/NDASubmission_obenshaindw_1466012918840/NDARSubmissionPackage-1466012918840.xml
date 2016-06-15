@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<submissionticket>
+    <content>
+        <package name="NDARSubmissionPackage-1466012918840.zip" date="1466012921411" crc="2339431755" NdarDataType="C G I"/>
+        <submissionFile name="C_submission.xml"/>
+        <submissionFile name="G_submission.xml"/>
+        <submissionFile name="I_submission.xml"/>
+        <file name="ACEII_Form_ados1_201201.csv" path="" zipped="false" size="1439" validated="true" type="data"/>
+        <file name="ACEII_Form_ados3_201201.csv" path="" zipped="false" size="1644" validated="true" type="data"/>
+        <file name="ace_fammedhist01.csv" path="" zipped="false" size="6402" validated="true" type="data"/>
+        <file name="control_subject02.csv" path="" zipped="false" size="44897" validated="true" type="data"/>
+        <file name="image03.csv" path="" zipped="false" size="1036" validated="true" type="data"/>
+        <file name="image03/NDAR_INV4M8DDJ1M_image03_1325522820658.gz" path="image03" zipped="false" type="associated"/>
+        <file name="image03/NDAR_INV4M8DDJ1M_image03_1325522820658.jpg" path="image03" zipped="false" type="associated"/>
+        <file name="ndar_subject.csv" path="" zipped="false" size="101468" validated="true" type="data"/>
+        <file name="Stage_Testing_BigFiles_genomics_sample03.csv" path="" zipped="false" size="1656" validated="true" type="data"/>
+        <file name="data/1G_file.fastq" path="data" zipped="false" type="associated"/>
+        <file name="data/5G_file.fastq" path="data" zipped="false" type="associated"/>
+        <file name="data/10G_file.fastq" path="data" zipped="false" type="associated"/>
+        <file name="data/20G_file.fastq" path="data" zipped="false" type="associated"/>
+        <file name="data/100G_file.fastq" path="data" zipped="false" type="associated"/>
+        <file name="Stage_Testing_BigFiles_genomics_subject02.csv" path="" zipped="false" size="1746" validated="true" type="data"/>
+    </content>
+</submissionticket>
