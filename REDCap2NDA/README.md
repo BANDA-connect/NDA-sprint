@@ -100,3 +100,7 @@ We used keys:
 Check output file "output.csv" for results
 
 ```
+
+## NDA dictionary viewer
+
+The NDA directory contains a viewer component that parses informations from NDA.
