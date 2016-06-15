@@ -54,7 +54,14 @@ if __name__ == "__main__":
                             if not ts[i] == "":
                                 print("we found a translator %s" % ts[i])
                                 # apply it to the current key
-                                val = subprocess.check_output(['ts/', ts[i] ," \"", itemstring, "\""])
+                                p=''.join([ 'ts/', ts[i] ])
+                                if not os.path.file.exist(p):
+                                    print ("Error: the translator %s does not exist." % p)
+                                try:
+                                    val = subprocess.check_output(['ts/', ts[i] ," \"", itemstring, "\""])
+                                except:
+                                    print("Failed")
+                                    pass
                                 print("got this value \"%s\"" % val)
                             usedKeys[m2[i]] = usedKeys[m2[i]] + 1
                         else:
