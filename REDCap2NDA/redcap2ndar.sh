@@ -25,7 +25,7 @@ if __name__ == "__main__":
             else:
                 mapR2N = []
 
-            print ("use the following map now: ")
+            print ("Map: \"%s\": " % mapfname)
             print  json.dumps(mapR2N, sort_keys=True, indent=4, separators=(',', ': '))
 
             # lets go through and create the mapping
